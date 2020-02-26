@@ -9,7 +9,7 @@ import (
 var tmpl = `
 <html>
 <body>
-	<h1>I Love You!</h1>
+<h1>I Love You! :)</h1> 
 </body>
 </html>
 `
