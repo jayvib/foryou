@@ -1,20 +1,25 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
 )
 
+var port = flag.String("port", "8080", "port")
+
 var tmpl = `
 <html>
 <body>
-<h1>miss kita! :)</h1> 
+	<h1>I Love You, Mahal! 😍 💝 😍</h1>
 </body>
 </html>
 `
 
 func main() {
+	flag.Parse()
 	t, _ := template.New("t").Parse(tmpl)
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		err := t.Execute(w, nil)
@@ -22,5 +27,8 @@ func main() {
 			log.Fatal(err)
 		}
 	})
-	http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(fmt.Sprintf(":%s", *port), nil)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
